@@ -1,8 +1,4 @@
 version: 0.2
-env:
-  variable:
-    $AWS_ACCOUNT_ID:'888982305799'
-    $SERVICE_NAME:'posts'
 
 phases:
   install:
@@ -16,14 +12,14 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build -t $SERVICE_NAME .
-      - docker tag $SERVICE_NAME:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$SERVICE_NAME:latest
+      - docker build -t posts .
+      - docker tag posts:latest 888982305799.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/posts:latest
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/users:latest
-      - printf '[{"name":$SERVICE_NAME,"imageUri":"%s"}]' $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$SERVICE_NAME:latest > imagedefinitions.json
+      - printf '[{"name":"posts","imageUri":"%s"}]' 888982305799.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/posts:latest > imagedefinitions.json
 
 artifacts:
   files: imagedefinitions.json
