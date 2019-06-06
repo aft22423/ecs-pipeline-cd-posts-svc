@@ -18,7 +18,7 @@ phases:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/users:latest
+      - docker push 888982305799.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/posts:latest
       - printf '[{"name":"posts","imageUri":"%s"}]' 888982305799.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/posts:latest > imagedefinitions.json
 
 artifacts:
