@@ -13,13 +13,13 @@ phases:
       - echo Build started on `date`
       - echo Building the Docker image...
       - docker build -t posts .
-      - docker tag posts:latest 888982305799.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/posts:latest
+      - docker tag posts:latest $AWS_ACCOUNT.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/posts:latest
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push 888982305799.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/posts:latest
-      - printf '[{"name":"posts","imageUri":"%s"}]' 888982305799.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/posts:latest > imagedefinitions.json
+      - docker push $AWS_ACCOUNT.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/posts:latest
+      - printf '[{"name":"posts","imageUri":"%s"}]' $AWS_ACCOUNT.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/posts:latest > imagedefinitions.json
 
 artifacts:
   files: imagedefinitions.json
